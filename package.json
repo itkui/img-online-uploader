@@ -1,0 +1,112 @@
+{
+	"name": "img-online-uploader",
+	"displayName": "img-online-uploader",
+	"description": "上传为一个在线图片地址",
+	"version": "0.0.1",
+	"publisher": "itkui<13452903663@163.com>",
+	"engines": {
+		"vscode": "^1.58.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:img-online-uploader.upload-image",
+		"onCommand:img-online-uploader.views-image"
+	],
+	"main": "./dist/extension.js",
+	"keywords": [
+		"upload image",
+		"image upload",
+		"upload"
+	],
+	"contributes": {
+		"configuration": [
+			{
+				"title": "图片上传工具配置",
+				"type": "object",
+				"properties": {
+					"img-online-uploader.uploader": {
+						"type": "string",
+						"default": "smms",
+						"description": "上传图床"
+					},
+					"img-online-uploader.storage_path": {
+						"type": "string",
+						"default": "",
+						"description": "历史上传记录文件目录"
+					},
+					"img-online-uploader.config": {
+						"type": "object",
+						"default": {
+							"token": "ujMTv3a3w8OUFDQSqvKeIoPfesf0qt3y"
+						},
+						"description": "图床上传配置"
+					}
+				}
+			}
+		],
+		"commands": [
+			{
+				"command": "img-online-uploader.upload-image",
+				"category": "Online Uploader",
+				"title": "生成图片链接"
+			},
+			{
+				"command": "img-online-uploader.views-image",
+				"category": "Online Uploader",
+				"title": "查看生成记录"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "img-online-uploader.upload-image",
+				"key": "alt+shift+u",
+				"mac": "alt+shift+u"
+			},
+			{
+				"command": "img-online-uploader.views-image",
+				"key": "alt+shift+v",
+				"mac": "alt+shift+v"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "img-online-uploader.upload-image",
+					"group": "navigation@1",
+					"when": "resourceExtname =~ /.(png|jpeg|jpg|gif)$/"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"test-compile": "tsc -p ./",
+		"test-watch": "tsc -watch -p ./",
+		"pretest": "yarn run test-compile && yarn run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "14.x",
+		"@types/vscode": "^1.58.0",
+		"@typescript-eslint/eslint-plugin": "^4.26.0",
+		"@typescript-eslint/parser": "^4.26.0",
+		"eslint": "^7.27.0",
+		"glob": "^7.1.7",
+		"mocha": "^8.4.0",
+		"picgo": "^1.4.21",
+		"ts-loader": "^9.2.2",
+		"typescript": "^4.3.2",
+		"vscode-test": "^1.5.2",
+		"webpack": "^5.38.1",
+		"webpack-cli": "^4.7.0"
+	},
+	"dependencies": {}
+}
